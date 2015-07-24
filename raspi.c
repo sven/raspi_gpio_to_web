@@ -55,7 +55,7 @@ int main(void)
     int one = 1;                                /**< socket option */
     socklen_t cli_size;                         /**< client addr size */
     int raspi_gpio_status = 0;                  /**< GPIO status */
-    struct sockaddr_in srv_addr;              /**< webserver addr */
+    struct sockaddr_in srv_addr;                /**< webserver addr */
     struct sockaddr_in cli_addr;                /**< client addr */
 
 #ifdef RASPI_GPIO
