@@ -99,6 +99,9 @@ int main(void)
         return 1;
     }
 
+    /* greet user */
+    printf("all systems initialized, waiting for requests on http://raspberrypi:3333\n");
+
     /* start main loop */
     while (1) {
 
