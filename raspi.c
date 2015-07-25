@@ -67,6 +67,9 @@ int main(void)
         return 1;
     }
 
+    /* enable internal pull up resistor */
+    pullUpDnControl(INPUT_PIN, PUD_UP);
+
     /* open socket for webserver */
     fd = socket(AF_INET, SOCK_STREAM, 0);
     if (0 > fd) {
