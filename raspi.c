@@ -118,7 +118,7 @@ int main(void)
         raspi_gpio_status = digitalRead(INPUT_PIN);
 
         /* ignore request and only print counter value */
-        snprintf(raspi_html_buf, sizeof(raspi_html_buf), "<html><body>Z&auml;hler: %u<br/>GPIO Status: %u</body></html>", raspi_isr_counter, raspi_gpio_status);
+        snprintf(raspi_html_buf, sizeof(raspi_html_buf), "<html><body>Z&auml;hler: %u<br/>GPIO Status: %u</body></html>", raspi_isr_counter, !raspi_gpio_status);
         res = write(new_fd, raspi_html_buf, strlen(raspi_html_buf));
         if (0 > res) {
             fprintf(stderr, "Error: writing to socket failed: %s\n", strerror(errno));
