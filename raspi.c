@@ -114,6 +114,7 @@ int main(void)
             return 1;
         }
 
+        /* read GPIO status */
         raspi_gpio_status = digitalRead(INPUT_PIN);
 
         /* ignore request and only print counter value */
