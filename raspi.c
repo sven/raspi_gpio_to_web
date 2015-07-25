@@ -11,10 +11,7 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <string.h>
-
-#ifdef RASPI_GPIO
-#  include <wiringPi.h>
-#endif
+#include <wiringPi.h>
 
 
 /*****************************************************************************
@@ -34,14 +31,12 @@ static char raspi_html_buf[1024];               /**< html buffer */
 /*****************************************************************************/
 /** GPIO counter function
  */
-#ifdef RASPI_GPIO
 static void raspi_counter(
     void
 )
 {
     raspi_isr_counter++;
 }
-#endif
 
 
 /*****************************************************************************/
@@ -58,7 +53,6 @@ int main(void)
     struct sockaddr_in srv_addr;                /**< webserver addr */
     struct sockaddr_in cli_addr;                /**< client addr */
 
-#ifdef RASPI_GPIO
     /* setup wiringPi */
     res = wiringPiSetup();
     if (0 > res) {
@@ -72,7 +66,6 @@ int main(void)
         fprintf(stderr, "Error: setup ISR pin failed: %s\n", strerror(errno));
         return 1;
     }
-#endif
 
     /* open socket for webserver */
     fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -118,9 +111,7 @@ int main(void)
             return 1;
         }
 
-#ifdef RASPI_GPIO
         raspi_gpio_status = digitalRead(INPUT_PIN);
-#endif
 
         /* ignore request and only print counter value */
         snprintf(raspi_html_buf, sizeof(raspi_html_buf), "<html><body>Z&auml;hler: %u<br/>GPIO Status: %u</body></html>", raspi_isr_counter, raspi_gpio_status);
